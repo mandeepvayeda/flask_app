@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>employee database</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+	<h1 style="text-align: center">employee table</h1>
+	{% if display|length < 1 %}
+	    <h4 style="text-align: center">There are no tasks. Create one below!</h4>
+	{% else %}
+	<div class="form">
+		<form action="/" method="GET">
+			<input type="text" name="name" id="name">
+			<input type="submit" name="search">
+	<table>
+		<tr>
+			<th>name</th>
+			<th>designation</th>
+			<th>adress</th>
+			<th>phone</th>
+			<th>action</th>
+		</tr>
+		{% for items in display %}
+		<tr>
+			<td>{{ display.name }}</td>
+			<td>{{ display.designation }}</td>
+			<td>{{ display.address }}</td>
+			<td>{{ display.phone }}</td>
+			<td>
+				<a href="/delete/{{ display.id }}">delete</a>
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+	{% endif %}
+	<div class="form">
+        <form action="/" method="POST">
+            <input type="text" name="name" id="name">
+            <input type="text" name="designation" id="designation">
+            <input type="text" name="address" id="address">
+            <input type="text" name="phone" id="phone">
+            <input type="submit" value="Add employee">
+        </form>
+    </div>
+</div>
+
+{% endblock %}
