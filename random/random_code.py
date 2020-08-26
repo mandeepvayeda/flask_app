@@ -39,7 +39,7 @@ for j in li_once:
 	elif li_once[j] == 3:
 		c3 += 1
 	elif li_once[j] == 4:
-		c4 += 4
+		c4 += 1
 	else:
 		c += 1
 
