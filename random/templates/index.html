@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+    
+    <style>
+    	table {
+  				width:100%;
+				}
+		table, th, td {
+  				border: 1px solid black;
+  				border-collapse: collapse;
+					}
+		th, td {
+				  padding: 15px;
+				  text-align: left;
+					}
+		#t01 th {
+				background-color: black;
+				color: white;
+				}
+	</style>
+</head>
+<body>
+	<li>No of orders: {{ count }} </li>
+	<br>
+	<li>Total amount of orders: {{ amount }}</li>
+	<br>
+	<li>customers that ordered once: {{ lis }}</li>
+	<br>
+	<table id="t01">
+		<tr>
+			<th>No. of Orders</th>
+			<th>Count of customers</th>
+		</tr>
+
+		<tr>
+		    <td>1</td>
+		    <td>{{ c1 }}</td>
+		</tr>
+		<tr>
+		    <td>2</td>
+		    <td>{{ c2 }}</td>
+		</tr>
+		<tr>
+		    <td>3</td>
+		    <td>{{ c3 }}</td>
+		</tr>
+		<tr>
+		    <td>4</td>
+		    <td>{{ c4 }}</td>
+		</tr>
+		<tr>
+		    <td>5+</td>
+		    <td>{{ c }}</td>
+  		</tr>
+	</table>
+
+	<center>
+    <canvas id="chart" width="600" height="400"></canvas>
+	    <script>
+	      // bar chart data
+	      var barData = {
+	        labels : [
+	          {% for item in labels %}
+	           "{{ item }}",
+	          {% endfor %}
+		],
+
+	        datasets : [{
+	          fillColor: "rgba(151,187,205,0.2)",
+	          strokeColor: "rgba(151,187,205,1)",
+	          pointColor: "rgba(151,187,205,1)",
+	          data : [
+	            {% for item in values %}
+	               "{{ item }}",
+	              {% endfor %}
+		    ]
+	          }
+	        ]
+	      }
+
+	     // get bar chart canvas
+	     var mychart = document.getElementById("chart").getContext("2d");
+
+	       steps = 10
+	       max = 350
+
+	     // draw bar chart
+	     new Chart(mychart).Bar(barData, {
+	       scaleOverride: true,
+	       scaleSteps: steps,
+	       scaleStepWidth: Math.ceil(max / steps),
+	       scaleStartValue: 0,
+	       scaleShowVerticalLines: true,
+	       scaleShowGridLines : true,
+	       barShowStroke : true,
+	       scaleShowLabels: true
+	       }
+	     );
+
+    </script>
+  </center>
+	
+
+    
+</body>
+</html>
